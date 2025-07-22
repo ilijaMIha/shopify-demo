@@ -1,0 +1,91 @@
+<!-- Dugme koje otvara popup -->
+<button id="open-tech-specs" type="button" class="button button--tertiary" style="margin-top: 1rem;">
+  View technical specs
+</button>
+
+<!-- Popup -->
+<div id="tech-specs-popup" class="tech-specs-popup" style="display: none;">
+  <div class="tech-specs-popup__content">
+    <button id="close-tech-specs" class="tech-specs-popup__close" aria-label="Close popup">×</button>
+    <h3>Technical Specifications</h3>
+    <ul>
+      <li>Battery Capacity: 5000mAh</li>
+      <li>Charging Speed: 30W fast charge</li>
+      <li>Compatibility: USB-C, Lightning, Micro-USB</li>
+      <li>Dimensions: 10cm x 5cm x 2cm</li>
+      <li>Weight: 150g</li>
+    </ul>
+  </div>
+</div>
+
+<style>
+.tech-specs-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tech-specs-popup__content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+}
+.tech-specs-popup__close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+  #open-tech-specs {
+  background-color: #ff5722; 
+  color: white;
+  font-size: 1.25rem; 
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+#open-tech-specs:hover {
+  background-color: #e64a19; 
+}
+
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const openBtn = document.getElementById('open-tech-specs');
+    const closeBtn = document.getElementById('close-tech-specs');
+    const popup = document.getElementById('tech-specs-popup');
+
+    if (openBtn && closeBtn && popup) {
+      openBtn.addEventListener('click', function () {
+        popup.style.display = 'flex';
+      });
+
+      closeBtn.addEventListener('click', function () {
+        popup.style.display = 'none';
+      });
+
+      popup.addEventListener('click', function (e) {
+        if (e.target === popup) popup.style.display = 'none';
+      });
+    }
+  });
+</script>
