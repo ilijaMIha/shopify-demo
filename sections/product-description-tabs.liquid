@@ -1,0 +1,94 @@
+{% schema %}
+{
+  "name": "Product Description Tabs",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab Title",
+          "default": "Specifications"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab Content",
+          "default": "<p>This is the content of the specifications tab.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Description Tabs",
+      "category": "Product",
+      "blocks": [
+        { "type": "tab" },
+        { "type": "tab" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="tabs-wrapper page-width" style="margin-top: 3rem;">
+  <ul class="tabs-nav" role="tablist">
+    {% for block in section.blocks %}
+      <li role="tab" tabindex="0" aria-controls="tab-{{ forloop.index }}" class="{% if forloop.first %}active{% endif %}">
+        {{ block.settings.title }}
+      </li>
+    {% endfor %}
+  </ul>
+  <div class="tabs-content">
+    {% for block in section.blocks %}
+      <div id="tab-{{ forloop.index }}" role="tabpanel" class="tab-content {% if forloop.first %}active{% endif %}">
+        {{ block.settings.content }}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+.tabs-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.tabs-nav li {
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-weight: bold;
+}
+.tabs-nav li.active {
+  border-color: black;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tabs = document.querySelectorAll(".tabs-nav li");
+  const contents = document.querySelectorAll(".tab-content");
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
+      contents.forEach(c => c.classList.remove("active"));
+
+      tab.classList.add("active");
+      contents[index].classList.add("active");
+    });
+  });
+});
+</script>

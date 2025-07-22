@@ -1,0 +1,22 @@
+<div class="cart-icon-wrapper" style="position: relative;">
+  <div id="cart-added-notice" style="display: none; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: #0f0; color: #000; padding: 4px 8px; font-size: 12px; border-radius: 4px;">
+    ✔️ Added!
+  </div>
+
+  {% if cart == empty %}
+    <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+  {% else %}
+    <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+  {% endif %}
+
+  <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+
+  {%- if cart != empty -%}
+    <div id="cart-icon-bubble" class="cart-count-bubble">
+      {%- if cart.item_count < 100 -%}
+        <span aria-hidden="true">{{ cart.item_count }}</span>
+      {%- endif -%}
+      <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+    </div>
+  {%- endif -%}
+</div>

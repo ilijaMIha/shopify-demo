@@ -1,0 +1,93 @@
+{% schema %}
+{
+  "name": "Logo List",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted Brands"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo Image"
+        },
+        {
+          "type": "url",
+          "id": "logo_link",
+          "label": "Optional Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Logo List",
+      "category": "Custom",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<section class="logo-list-section">
+  <div class="page-width">
+    <h2 class="logo-list-heading">{{ section.settings.heading }}</h2>
+    <div class="logo-list-grid">
+      {% for block in section.blocks %}
+        {% if block.settings.logo_image %}
+          <div class="logo-item">
+            {% if block.settings.logo_link != blank %}
+              <a href="{{ block.settings.logo_link }}" target="_blank" rel="noopener">
+                <img src="{{ block.settings.logo_image | image_url: width: 200 }}" alt="Brand logo" loading="lazy" />
+              </a>
+            {% else %}
+              <img src="{{ block.settings.logo_image | image_url: width: 200 }}" alt="Brand logo" loading="lazy" />
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+.logo-list-section {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+.logo-list-heading {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+.logo-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+}
+.logo-item img {
+  max-width: 100%;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+.logo-item img:hover {
+  opacity: 1;
+}
+</style>
