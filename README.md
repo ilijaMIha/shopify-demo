@@ -5,7 +5,7 @@ The theme is based on Shopify's **Dawn** starter theme and demonstrates a variet
 
 ---
 
-## ✅ Implemented Tasks
+## ✅ Implemented Tasks 
 
 Below are the small Shopify tasks implemented in this project:
 
